@@ -1,130 +1,37 @@
-import { useState } from "react";
-import "./App.css";
-
+import { useEffect, useState } from "react";
 
 function App() {
-  const [counter, setCounter] = useState(0);
+  const [currentTab, setCurrentTab] = useState(1);
+  const [tabData, setTabData] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  return (
-    <div>
-      <h1>{counter}</h1>
+  useEffect(function() {
+    setLoading(true);
+    fetch("https://jsonplaceholder.typicode.com/todos/" + currentTab)
+      .then(async res => {
+        const json = await res.json();
+        setTabData(json);
+        setLoading(false);
+      });
 
-      <button onClick={() => setCounter(counter + 1)}>
-      Add value
-      </button>
-
-      <button onClick={() => setCounter(counter - 1)}>
-        remove value
-      </button>
-    </div>
-  );
+  }, [])
+  
+  return <div>
+    <button onClick={function() {
+      setCurrentTab(1)
+    }} style={{color: currentTab == 1 ? "red" : "black"}}>Todo #1</button>
+    <button onClick={function() {
+      setCurrentTab(2)
+    }} style={{color: currentTab == 2 ? "red" : "black"}}>Todo #2</button>
+    <button onClick={function() {
+      setCurrentTab(3)
+    }} style={{color: currentTab == 3 ? "red" : "black"}}>Todo #3</button>
+    <button onClick={function() {
+      setCurrentTab(4)
+    }} style={{color: currentTab == 4 ? "red" : "black"}}>Todo #4</button>
+<br /> 
+    {loading ? "Loading..." : tabData.title}
+  </div>
 }
 
 export default App;
-//     <div
-//       style={{
-//         backgroundColor: "#dfe6e9",
-//         minHeight: "100vh",
-//         padding: 20,
-//       }}
-//     >
-//       <PostComponent 
-//       name="100xDevs"
-//       followers= "28.3k"
-//       time= "12m"
-//       verified={true}
-//       description= "Helping thousands of developers learn full-stack development and build real-world projects."
-//       />
-//       <br />
-//       <PostComponent 
-//       name="Prince"
-//       followers= "10k"
-//       time= "6m"
-//       verified={false}
-//       description= "Aspiring full-stack developer documenting the journey from student to software engineer."
-//       />
-//       <br />
-//       <PostComponent 
-//       name="X"
-//       followers= "10M"
-//       time= "1m"
-//       verified={true}
-//       description= "A social media platform where people share ideas, news, updates, and conversations in real time."
-//       />
-//     </div>
-//   );
-// }
-
-
-// function PostComponent(props) {
-//   return (
-//     <div
-//       style={{
-//         width: 250,
-//         backgroundColor: "white",
-//         borderRadius: 10,
-//         padding: 15,
-//         margin: "0 auto",
-//       }}
-//     >
-//       {/* Header */}
-//       <div
-//         style={{
-//           display: "flex",
-//           alignItems: "center",
-//         }}
-//       >
-//         <img
-//           src="https://appx-wsb-gcp-mcdn.akamai.net.in/subject/2023-01-17-0.17044360120951185.jpg"
-//           alt="profile"
-//           style={{
-//             width: 40,
-//             height: 40,
-//             borderRadius: "50%",
-//           }}
-//         />
-
-//         <div style={{ marginLeft: 10 }}>
-//           <div
-//             style={{
-//               fontWeight: "bold",
-//               fontSize: 16,
-//             }}
-//           >
-//             {props.name}
-//             {props.verified && "✅"}
-//           </div>
-
-//           <div
-//             style={{
-//               fontSize: 12,
-//               color: "gray",
-//             }}
-//           >
-//             {props.followers} followers
-//           </div>
-
-//           <div
-//             style={{
-//               fontSize: 12,
-//               color: "gray",
-//             }}
-//           >
-//             {props.time} ago
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Post Content */}
-//       <div
-//         style={{
-//           marginTop: 12,
-//           fontSize: 14,
-//           lineHeight: 1.5,
-//         }}
-//       >
-//         {props.description}
-//       </div>
-//     </div>
-//   );
-// }
