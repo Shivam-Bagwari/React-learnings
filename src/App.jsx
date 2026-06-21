@@ -1,24 +1,32 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 
-function App()
-{
-const Timer = () => {
-    const [seconds, setSeconds] = useState(0);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setSeconds(prev => prev + 1);
-        }, 1000);
-
-        return () => clearInterval(interval); // Cleanup on unmount
-    }, []);
-
-    return <div>{seconds} seconds elapsed</div>;
+const Card = ({ children }) => {
+    return (
+        <div style={{
+            border: '1px solid #ccc',
+            borderRadius: '5px',
+            padding: '20px',
+            margin: '10px',
+            boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.1)',
+        }}>
+            {children}
+        </div>
+    );
 };
-return(
-  <div>
-    <Timer />
-  </div>
-)
-}
+
+const App = () => {
+    return (
+        <div>
+            <Card>
+                <h2>Card Title</h2>
+                <p>This is some content inside the card.</p>
+            </Card>
+            <Card>
+                <h2>Another Card</h2>
+                <p>This card has different content!</p>
+            </Card>
+        </div>
+    );
+};
+
 export default App;
