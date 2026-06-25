@@ -1,11 +1,23 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
 
 function App() {
   return (
     <div>
+      {/* <a href="/">ALLEN</a>
+      <br />
+      <a href="/neet/online-coaching-class-11">Class 11</a>
+      <br />
+      <a href="/neet/online-coaching-class-12">Class 12</a> */}
+
+
       <BrowserRouter>
+        <Link to="/">ALLEN</Link>
+        <br />
+        <Link to="/neet/online-coaching-class-11">Class 11</Link>
+        <br />
+        <Link to="/neet/online-coaching-class-12">Class 12</Link>
         <Routes>
-          <Route path="/" element={<Landing />} />
+          <Route path="/" element={<Landing />} /> 
           <Route
             path="/neet/online-coaching-class-11" element={<Class11Program />}
           />
@@ -19,7 +31,7 @@ function App() {
 }
 
 function Landing() {
-  return <div>Welcome to NEET</div>;
+  return <div>Welcome to ALLEN</div>;
 }
 
 function Class11Program() {
