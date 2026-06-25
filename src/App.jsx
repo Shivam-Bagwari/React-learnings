@@ -1,32 +1,33 @@
-import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-const Card = ({ children }) => {
-    return (
-        <div style={{
-            border: '1px solid #ccc',
-            borderRadius: '5px',
-            padding: '20px',
-            margin: '10px',
-            boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.1)',
-        }}>
-            {children}
-        </div>
-    );
-};
+function App() {
+  return (
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route
+            path="/neet/online-coaching-class-11" element={<Class11Program />}
+          />
+          <Route
+            path="/neet/online-coaching-class-12" element={<Class12Program />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+}
 
-const App = () => {
-    return (
-        <div>
-            <Card>
-                <h2>Card Title</h2>
-                <p>This is some content inside the card.</p>
-            </Card>
-            <Card>
-                <h2>Another Card</h2>
-                <p>This card has different content!</p>
-            </Card>
-        </div>
-    );
-};
+function Landing() {
+  return <div>Welcome to NEET</div>;
+}
+
+function Class11Program() {
+  return <div>NEET Programs for class 11th</div>;
+}
+
+function Class12Program() {
+  return <div>NEET Programs for class 12th</div>;
+}
 
 export default App;
