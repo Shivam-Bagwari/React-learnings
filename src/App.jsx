@@ -1,18 +1,37 @@
-import React, { useRef } from 'react';
+import { useState } from 'react'
+import './App.css'
+
 function App() {
-
-  const inputRef = useRef(null);
-
-  const handleFocus = () => {
-    inputRef.current.focus();
-  };
-  
-  return (
-    <div>
-      <input ref={inputRef} type="text" placeholder="Input" />
-      <button onClick={handleFocus}>Focus the input</button>
-    </div>
-  );
+  return <div>
+    <LightBulb />
+  </div>
 }
 
-export default App;
+function LightBulb() {
+  const [bulbOn, setBulbOn] = useState(true)
+
+  return <div>
+    <BulbState bulbOn={bulbOn} />
+    <ToggleBulbState bulbOn={bulbOn} setBulbOn={setBulbOn} />
+  </div>
+}
+
+function BulbState({bulbOn}) {
+  return <div>
+    {bulbOn ? "Bulb on" : "Bulb off"}
+  </div>
+}
+
+function ToggleBulbState({bulbOn, setBulbOn}) {
+
+  function toggle() {
+    setBulbOn(!bulbOn)
+    
+  }
+
+  return <div>
+    <button onClick={toggle}>Toggle the bulb</button>
+  </div>
+}
+
+export default App
